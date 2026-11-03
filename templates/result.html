@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block content %}<section class="panel"><a href="/">← Back</a><h1>Query output</h1><pre>{{ sql }}</pre>
+{% if error %}<div class="error"><b>Database error:</b> {{ error }}</div><h3>What it means</h3><p>{{ meaning }}</p><h3>How to fix it</h3><p>{{ fix }}</p>
+{% else %}<p class="success">Query executed successfully · {{ rows|length }} row(s)</p>{% if columns %}<div class="tablewrap"><table><thead><tr>{% for c in columns %}<th>{{ c }}</th>{% endfor %}</tr></thead><tbody>{% for row in rows %}<tr>{% for c in columns %}<td>{{ row[c] }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>{% else %}<p>No rows returned.</p>{% endif %}{% endif %}</section>{% endblock %}

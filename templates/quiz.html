@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}<section class="panel"><a href="/">← Home</a><h1>12-question DBMS quiz</h1><p>Choose one answer for each question.</p>
+{% if score is not none %}<div class="success">Your score: {{ score }} / 12</div>{% endif %}
+<form method="post">{% for q in questions %}{% set qi = loop.index0 %}<fieldset><legend>{{ loop.index }}. {{ q[0] }}</legend>{% for option in q[1] %}<label class="choice"><input type="radio" name="q{{ qi }}" value="{{ option }}" required> {{ option }}</label>{% endfor %}</fieldset>{% endfor %}<button class="button">Submit answers</button></form>
+{% if score is not none %}<h2>Answer key</h2><ol>{% for q in questions %}<li><b>{{ q[2] }}</b> — {{ q[3] }}</li>{% endfor %}</ol>{% endif %}</section>{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}<section class="panel"><a href="/">← Home</a><h1>Normalization: 1NF to 3NF</h1>
+<p>Example: a library records which member borrows which book. The initial design repeats member and book details for every loan.</p>
+<h2>Unnormalized form (UNF)</h2><pre>LoanRecord(member_id, member_name, member_email,
+            {book_id, title, author_name, loan_date, due_date})</pre><p>Problem: a member can have multiple books in one repeating group; values are not atomic.</p>
+<h2>First Normal Form (1NF)</h2><pre>LoanLine(loan_id, member_id, member_name, member_email,
+         book_id, title, author_name, loan_date, due_date)</pre><p>Each row represents one book loan and every cell contains one value. A possible key is (loan_id, book_id).</p>
+<h2>Second Normal Form (2NF)</h2><p>With the composite key, member details depend only on loan_id, while book details depend only on book_id. Move them to separate relations to remove partial dependencies.</p><pre>Members(member_id PK, member_name, member_email)
+Books(book_id PK, title, author_id FK)
+Loans(loan_id PK, member_id FK, loan_date)
+LoanItems(loan_id PK/FK, book_id PK/FK, due_date)</pre>
+<h2>Third Normal Form (3NF)</h2><p>Author name depends on author_id, not directly on book_id. Store author details separately, removing the transitive dependency.</p><pre>Authors(author_id PK, author_name)
+Books(book_id PK, title, author_id FK, price)</pre>
+<p><b>Result:</b> member, author and book facts are stored once; foreign keys connect the relations. The final schema is in <code>sql/schema.sql</code>.</p></section>{% endblock %}

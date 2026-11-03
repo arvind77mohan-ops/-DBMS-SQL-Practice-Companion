@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<section class="hero"><p class="eyebrow">LEARN BY DOING</p><h1>Understand databases.<br><em>Write better SQL.</em></h1><p>A guided practice space for ER concepts, normalization, SQL queries, indexes and transactions.</p><a class="button" href="#console">Try a SQL query</a></section>
+<div class="cards"><article><h2>01 · SQL playground</h2><p>Run read-only SELECT statements against a sample library database and inspect the output.</p></article><article><h2>02 · Normalization guide</h2><p>Follow a worked example from an unnormalized table through 1NF, 2NF and 3NF.</p><a href="/normalization">Open guide →</a></article><article><h2>03 · Knowledge check</h2><p>Test your understanding with 12 questions and instant scoring.</p><a href="/quiz">Start quiz →</a></article></div>
+<section id="console" class="panel"><h2>SQL practice console</h2><p>Try <code>SELECT * FROM Books;</code> or <code>SELECT title, price FROM Books WHERE price &gt; 500;</code></p>
+<form action="/run-query" method="post"><textarea name="sql" rows="5" placeholder="SELECT title, author, price FROM Books ORDER BY price DESC;" required></textarea><button class="button">Run query</button></form></section>
+<section class="panel"><h2>Database schema</h2><p>Tables: <b>Members</b>, <b>Books</b>, <b>Loans</b>, and <b>Authors</b>. Sample records are fictional.</p>
+<div class="schema"><div>Members<br><small>member_id · name · email</small></div><div>Loans<br><small>loan_id · member_id · book_id · dates</small></div><div>Books<br><small>book_id · title · author_id · price</small></div><div>Authors<br><small>author_id · author_name</small></div></div></section>
+{% endblock %}
